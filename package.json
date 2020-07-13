@@ -1,0 +1,11 @@
+{
+    "name": "pif_covid_screener_site_generator",
+    "version": "1.0.0",
+    "description": "Site Generator for Covid19 Screener App",
+    "main": "index.html",
+    "scripts": {
+        "federalist": "node federalist_site_generator.js"
+    },
+    "author": "Irtaza Barlas",
+    "license": "ISC"
+}
