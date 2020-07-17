@@ -369,7 +369,7 @@ const flowcharts = [
                 "type": "statement",
                 "short": "", //Screening Needed",
                 "theme": "cyan-card",
-                "text": `<span style='font-size:2.5em; line-height: 1.2em;'>Access to VA Facility Denied.</span>
+                "text": `<span style='font-size:2.5em; line-height: 1.2em;'>VACO access denied.</span>
                         <hr>Valid for $DATETIME.
                         <hr>Contact your supervisor for further instructions.`,
                 "sms" : "Access to VA Building Not Approved.",
@@ -381,9 +381,9 @@ const flowcharts = [
                 "short": "", //<span style='text-align: center;'>Welcome!</span>",
                 "theme": "blue-card",
                 "text": `<span style='font-size:50px; text-align: center;'>&#9745;</span><br>
-                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>Access to VA Facility Approved.</span>
+                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>VACO Access Approved.</span>
                         <hr>Valid for $DATETIME.<hr>Please show this screen to security at the facility entrance.`,
-                "sms" : "Access to Facility Approved.\nPlease show this screen to security at the facility entrance.",
+                "sms" : "Access to VACO Approved.\nPlease show this screen to security at the facility entrance.",
                 "info": "You can enter the facilities but follow safety protocols and Social Distancing.",
                 "next": ""
             }
@@ -391,8 +391,23 @@ const flowcharts = [
     },
     {
         "id": 7,    
-        "flow": {   
-            "start": {
+        "flow": { 
+           
+            "start": {  // Name of the State. The FIRST state is ALWAYS 'start'
+                "type": "bool_decision",        // bool_decision OR 'statement'
+                                                // If type = statement, it has only one button 'next'.
+                "short": "", //Travel Risk?",   // OPTIONAL create a header for each question if available
+                "theme": "white-card",          // class from theme.css
+                "text": "<div class='text-left'>In the last 14 days, have you traveled internationally?<div>",      // text of the question
+                "sms" : "In the last 14 days, have you traveled internationally?",      // TODO: OPTIONAL: used if SMS is enabled
+                "info": "There are hotspots identified internationally.",// TODO: OPTIONAL: used in SMS right now
+                "yes" : "b10",                  // For boolean 'type', Yes Button points to this next state
+                "no"  : "b1"                    // For boolean 'type', No Button points to this next state
+                                                // If empty, that marks the END of the flow. If "end" is 
+                                                // explicitly used, as state, then Reset button is not shown.
+                                                
+            },  
+            "b1": {
                 "type": "bool_decision",
                 "short": "", //Symptoms to Watch?",
                 "text": `<div class='text-left'>Have you had any of the following NEW or WORSENING conditions in the past 48 hours? <br><br><ul>
