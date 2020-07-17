@@ -369,7 +369,7 @@ const flowcharts = [
                 "type": "statement",
                 "short": "", //Screening Needed",
                 "theme": "cyan-card",
-                "text": `<span style='font-size:2.5em; line-height: 1.2em;'>VACO access denied.</span>
+                "text": `<span style='font-size:2.5em; line-height: 1.2em;'>Access to VA Facility Denied.</span>
                         <hr>Valid for $DATETIME.
                         <hr>Contact your supervisor for further instructions.`,
                 "sms" : "Access to VA Building Not Approved.",
@@ -381,9 +381,9 @@ const flowcharts = [
                 "short": "", //<span style='text-align: center;'>Welcome!</span>",
                 "theme": "blue-card",
                 "text": `<span style='font-size:50px; text-align: center;'>&#9745;</span><br>
-                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>VACO Access Approved.</span>
+                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>Access to VA Facility Approved.</span>
                         <hr>Valid for $DATETIME.<hr>Please show this screen to security at the facility entrance.`,
-                "sms" : "Access to VACO Approved.\nPlease show this screen to security at the facility entrance.",
+                "sms" : "Access to Facility Approved.\nPlease show this screen to security at the facility entrance.",
                 "info": "You can enter the facilities but follow safety protocols and Social Distancing.",
                 "next": ""
             }
