@@ -85,14 +85,14 @@ const facilities = [
     },
     {
         id: 6, // each facility has its unique ID
-        name: 'VA Non-Clinical Facility Entrance Protocol',
+        name: 'VA Facility Entrance Protocol For VACO',
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
         header_color: '#112e51',
         header_text_color: '#ffffff',   //TODO
         created_by: 'Joseph Nassar',    // For record
         created_on: '06/23/2020',       // For record
         effective_from: '06/20/2020',   // Work after this date
-        effective_till: '06/19/2022',   // Work before this date
+        effective_till: '06/19/2021',   // Work before this date
         flow_enabled: true,             // overall control
         address: 'Any',                 // TODO
         gps_coord: "",                  // TODO
@@ -102,14 +102,14 @@ const facilities = [
     },
     {
         id: 7, // each facility has its unique ID
-        name: 'VA Facility Entrance Protocol',
+        name: 'VA Non-Medical Facility Entrance Protocol',
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
         header_color: '#112e51',
         header_text_color: '#ffffff',   //TODO
         created_by: 'Bradly Armstrong',    // For record
         created_on: '06/25/2020',       // For record
         effective_from: '07/1/2020',   // Work after this date
-        effective_till: '06/30/2021',   // Work before this date
+        effective_till: '06/30/2022',   // Work before this date
         flow_enabled: true,             // overall control
         address: 'Any',                 // TODO
         gps_coord: "",                  // TODO
