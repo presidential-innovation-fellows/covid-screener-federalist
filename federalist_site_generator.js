@@ -44,17 +44,36 @@ readFile(templ_file_name, {encoding:'utf8', flag:'r'}).then(template => {
             let flow_id = fac.flow_id;
             let flow = fac_utils.get_flowchart_JSON_by_id(flow_id);
             if(flow!==undefined){
-                // console.log('========================' + fac_id);
+                console.log('Working on: ' + fac_id + ") " + fac.name);
                 let first_repl = '';
                 first_repl = template_string.replace(facility_handle, JSON.stringify(fac));
                 let html_string = first_repl.replace(flowchart_handle, JSON.stringify(flow));
 
-                let path = site_home + '/' + fac_id + '.' + flow_id + '.html';
-                console.log('Creating: ' + path);
-                // create file
-                fs.writeFile(path, html_string, {encoding: "utf8", flag: "w", mode: 0o666}, 
-                    (err) => { if (err) console.log(err); else { console.log("File written successfully\n");}}
-                    );
+                let path = '';
+                if(fac.hasOwnProperty('generate_site')) {
+                    if(fac.generate_site)
+                    {
+
+                        if(fac.hasOwnProperty('default'))
+                        {
+                            if(fac.default)
+                            {
+                                path = site_home + '/index.html';
+                            }
+                            else {
+                                path = site_home + '/' + fac_id + '.' + flow_id + '.html';
+                            }
+                        } else {
+                            path = site_home + '/' + fac_id + '.' + flow_id + '.html';
+                        }
+                        
+                        console.log('> Creating: ' + path);
+                        // create file
+                        fs.writeFile(path, html_string, {encoding: "utf8", flag: "w", mode: 0o666}, 
+                            (err) => { if (err) console.log(err); else { console.log("> File written successfully\n");}}
+                            );
+                    }
+                }
             }
         }) 
     } catch(e) {

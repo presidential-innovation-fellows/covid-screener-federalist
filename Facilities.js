@@ -86,6 +86,7 @@ const facilities = [
     {
         id: 6, // each facility has its unique ID
         name: 'VA Facility Entrance Protocol For VACO',
+        generate_site: false,    // if set to true, the site generator creates an id.flow_id.html file from this config
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
         header_color: '#112e51',
         header_text_color: '#ffffff',   //TODO
@@ -103,9 +104,11 @@ const facilities = [
     {
         id: 7, // each facility has its unique ID
         name: 'VA Non-Medical Facility Entrance Protocol',
+        default: true,  // if set to true, the site generator script creates an index.html file from this config
+        generate_site: true,    // if set to true, the site generator creates an id.flow_id.html file from this config
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
         header_color: '#112e51',
-        header_text_color: '#ffffff',   //TODO
+        header_text_color: '#ffffff',   
         created_by: 'Bradly Armstrong',    // For record
         created_on: '06/25/2020',       // For record
         effective_from: '07/1/2020',   // Work after this date
