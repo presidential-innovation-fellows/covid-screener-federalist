@@ -104,7 +104,7 @@ const facilities = [
     {
         id: 7, // each facility has its unique ID
         name: 'VA Non-Medical Facility Entrance Protocol',
-        default: true,  // if set to true, the site generator script creates an index.html file from this config
+        default: false,  // if set to true, the site generator script creates an index.html file from this config
         generate_site: true,    // if set to true, the site generator creates an id.flow_id.html file from this config
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
         header_color: '#112e51',
@@ -118,6 +118,25 @@ const facilities = [
         gps_coord: "",                  // TODO
         sms_number: "",                 // TODO
         flow_id: 7                      // ID of the FlowChart 
+                                        //      to use for this facility
+    },
+    {
+        id: 8, // each facility has its unique ID
+        name: 'VA Non-Medical Facility Entrance Protocol (v2)',
+        default: false,  // if set to true, the site generator script creates an index.html file from this config
+        generate_site: true,    // if set to true, the site generator creates an id.flow_id.html file from this config
+        image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
+        header_color: '#112e51',
+        header_text_color: '#ffffff',   
+        created_by: 'Bradly Armstrong',    // For record
+        created_on: '06/25/2020',       // For record
+        effective_from: '02/12/2021',   // Work after this date
+        effective_till: '06/30/2023',   // Work before this date
+        flow_enabled: true,             // overall control
+        address: 'Any',                 // TODO
+        gps_coord: "",                  // TODO
+        sms_number: "",                 // TODO
+        flow_id: 8                      // ID of the FlowChart 
                                         //      to use for this facility
     },    
 ];

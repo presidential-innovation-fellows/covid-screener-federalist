@@ -470,7 +470,97 @@ const flowcharts = [
                 "next": ""
             }
         },
-    }          
+    },
+    {
+        "id": 8,        // VA - Bradley's request to follow CDC guidelines (Feb 12, 21)
+        "flow": { 
+           
+            "start": {
+                "type": "bool_decision",
+                "short": "", //Symptoms to Watch?",
+                "text": `<div class='text-left'>Have you experienced any of the following symptoms in the past 48 hours: <br><br><ul>
+                <ul>
+                    <li>fever or chills</li>
+                    <li>cough</li>
+                    <li>shortness of breath or difficulty breathing</li>
+                    <li>fatigue</li>
+                    <li>muscle or body aches</li>
+                    <li>headache</li>
+                    <li>new loss of taste or smell</li>
+                    <li>sore throat</li>
+                    <li>congestion or runny nose</li>
+                    <li>nausea or vomiting</li>
+                    <li>diarrhea</li>
+                </ul></div>`,
+                "theme": "white-card",                
+                "sms" : "",
+                "info": "",
+                "yes" : "b10",
+                "no"  : "b2"
+            },
+            "b2": {
+                "type": "bool_decision",
+                "short": "", //Proximity Risk?",
+                "theme": "white-card",
+                "text": `<div class='text-left'>
+                    Within the past 14 days, have you been in close physical contact (6 feet or closer for a cumulative total of 15 minutes) with:</p>
+                    <ul>
+                        <li>Anyone who is known to have laboratory-confirmed COVID-19?</li></ul>
+			            <ul style="list-style-type: none;text-align: center;"><li><strong>OR</strong></li></ul>
+                    <ul>
+                        <li>Anyone who has any symptoms consistent with COVID-19?</li></ul>
+                </div>`,
+                "sms" : "",
+                "info": "",
+                "yes" : "b10",
+                "no"  : "b3"
+            },            
+            "b3": {
+                "type": "bool_decision",
+                "short": "", //Advisory?",
+                "theme": "white-card",
+                "text": "<div class='text-left'>Are you isolating or quarantining because you may have been exposed to a person with COVID-19 or are worried that you may be sick with COVID-19?</div>",
+                "sms" : "",
+                "info": "",
+                "yes" : "b10",
+                "no"  : "b4"
+            },                    
+            "b4": {
+                "type": "bool_decision",
+                "short": "", //Advisory?",
+                "theme": "white-card",
+                "text": "<div class='text-left'>Are you currently waiting on the results of a COVID-19 test?</div>",
+                "sms" : "",
+                "info": "",
+                "yes" : "b10",
+                "no"  : "b20"
+            },                        
+            "b10": {
+                "type": "statement",
+                "short": "", //Not Approved
+                "theme": "cyan-card",
+                "text": `<span style='font-size:2em; line-height: 1.2em;'>Access to VA Facilities not approved</span>
+                        <hr>Valid for $DATETIME.
+                        <hr>Contact your supervisor for further instructions.
+                        <a href="https://www.cdc.gov/screening/further-instructions.html" target="_blank" title="Click Here">Click Here</a> for Further Instructions`,
+                "sms" : "",
+                "info": "",
+                "next": ""
+            },
+            "b20": {
+                "type": "statement",
+                "short": "", //<span style='text-align: center;'>Welcome!</span>",
+                "theme": "blue-card",
+                "text": `<span style='font-size:50px; text-align: center;'>&#9745;</span><br>
+                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>Access to VA Facilities Approved</span>
+                        <hr>Valid for $DATETIME.<hr>
+                        Please show this screen to security at the facility entrance, if required.`,
+                "sms" : "",
+                "info": "",
+                "next": ""
+            }
+        },
+    }             
 ];
 
 module.exports = flowcharts;

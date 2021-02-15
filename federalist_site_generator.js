@@ -32,7 +32,8 @@ readFile(templ_file_name, {encoding:'utf8', flag:'r'}).then(template => {
         let base_url_handle = '{base_url}';
         console.log('ENV BASE URL: ' + base_url_str);
 
-        // base_url_str = '/site/irtazabarlas-pif/pif-covid19-scanner-federalist';
+        //base_url_str = '/site/irtazabarlas-pif/pif-covid19-scanner-federalist';
+        base_url_str = './';
         console.log('USING BASE URL: ' + base_url_str);
 
         while(template_string.search(base_url_handle) != -1)

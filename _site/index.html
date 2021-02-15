@@ -14,7 +14,7 @@
           scroll-behavior: smooth;
         }
     </style>
-    <link rel="stylesheet" href="{base_url}/assets/css/themes.css">
+    <link rel="stylesheet" href=".//assets/css/themes.css">
     
     <script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=VA" id="_fed_an_ua_tag"></script>
     <!-- Favicons
@@ -28,14 +28,14 @@
   </head>
   <body>
     <section class="site-banner usa-banner" aria-label="Official government website">
-        <link rel="stylesheet" href="{base_url}/assets/css/uswds.css" media="none" onload="if(media!='all')media='all'">
+        <link rel="stylesheet" href=".//assets/css/uswds.css" media="none" onload="if(media!='all')media='all'">
         
-        <script async src="{base_url}/assets/js/uswds.min.js"></script>   
+        <script async src=".//assets/js/uswds.min.js"></script>   
         <div class="usa-accordion">
           <header class="usa-banner__header">
             <div class="usa-banner__inner">
               <div class="grid-col-auto">
-                <img class="usa-banner__header-flag" src="{base_url}/assets/img/us_flag_small.png" alt="U.S. flag">
+                <img class="usa-banner__header-flag" src=".//assets/img/us_flag_small.png" alt="U.S. flag">
               </div>
               <div class="grid-col-fill tablet:grid-col-auto">
                 <p class="usa-banner__header-text">An official website of the United States government</p>
@@ -50,7 +50,7 @@
           <div class="usa-banner__content usa-accordion__content" id="gov-banner">
             <div class="grid-row grid-gap-lg">
               <div class="usa-banner__guidance tablet:grid-col-6">
-                <img class="usa-banner__icon usa-media-block__img" src="{base_url}/assets/img/icon-dot-gov.svg" alt="Dot gov">
+                <img class="usa-banner__icon usa-media-block__img" src=".//assets/img/icon-dot-gov.svg" alt="Dot gov">
                 <div class="usa-media-block__body">
                   <p>
                     <strong>The .gov means it’s official.</strong>
@@ -60,7 +60,7 @@
                 </div>
               </div>
               <div class="usa-banner__guidance tablet:grid-col-6">
-                <img class="usa-banner__icon usa-media-block__img" src="{base_url}/assets/img/icon-https.svg" alt="Https">
+                <img class="usa-banner__icon usa-media-block__img" src=".//assets/img/icon-https.svg" alt="Https">
                 <div class="usa-media-block__body">
                   <p>
                     <strong>The site is secure.</strong>
@@ -97,7 +97,7 @@
 </html>
 
 <script>
-    
+    console.log("executing from: " + window.location.pathname);
     function apply_variables_in_text(text_in) {
         let vars = ['$DATETIME'];
         let t = "";
@@ -401,12 +401,12 @@
     }
 
     function default_loop() {
-        let facilitydata = [{facility_json_array_element}];      // variable that will be replaced by the federalist site generator
-        let flows = [{flow_json_array_element}];                 // variable that will be replaced by the federalist site generator
+        let facilitydata = [{"id":8,"name":"VA Non-Medical Facility Entrance Protocol (v2)","default":true,"generate_site":true,"image":"https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png","header_color":"#112e51","header_text_color":"#ffffff","created_by":"Bradly Armstrong","created_on":"06/25/2020","effective_from":"02/12/2021","effective_till":"06/30/2023","flow_enabled":true,"address":"Any","gps_coord":"","sms_number":"","flow_id":8}];      // variable that will be replaced by the federalist site generator
+        let flows = [{"id":8,"flow":{"start":{"type":"bool_decision","short":"","text":"<div class='text-left'>Have you experienced any of the following symptoms in the past 48 hours: <br><br><ul>\n                <ul>\n                    <li>fever or chills</li>\n                    <li>cough</li>\n                    <li>shortness of breath or difficulty breathing</li>\n                    <li>fatigue</li>\n                    <li>muscle or body aches</li>\n                    <li>headache</li>\n                    <li>new loss of taste or smell</li>\n                    <li>sore throat</li>\n                    <li>congestion or runny nose</li>\n                    <li>nausea or vomiting</li>\n                    <li>diarrhea</li>\n                </ul></div>","theme":"white-card","sms":"","info":"","yes":"b10","no":"b2"},"b2":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>\n                    Within the past 14 days, have you been in close physical contact (6 feet or closer for a cumulative total of 15 minutes) with:</p>\n                    <ul>\n                        <li>Anyone who is known to have laboratory-confirmed COVID-19?</li></ul>\n\t\t\t            <ul style=\"list-style-type: none;text-align: center;\"><li><strong>OR</strong></li></ul>\n                    <ul>\n                        <li>Anyone who has any symptoms consistent with COVID-19?</li></ul>\n                </div>","sms":"","info":"","yes":"b10","no":"b3"},"b3":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>Are you isolating or quarantining because you may have been exposed to a person with COVID-19 or are worried that you may be sick with COVID-19?</div>","sms":"","info":"","yes":"b10","no":"b4"},"b4":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>Are you currently waiting on the results of a COVID-19 test?</div>","sms":"","info":"","yes":"b10","no":"b20"},"b10":{"type":"statement","short":"","theme":"cyan-card","text":"<span style='font-size:2em; line-height: 1.2em;'>Access to VA Facilities not approved</span>\n                        <hr>Valid for $DATETIME.\n                        <hr>Contact your supervisor for further instructions.\n                        <a href=\"https://www.cdc.gov/screening/further-instructions.html\" target=\"_blank\" title=\"Click Here\">Click Here</a> for Further Instructions","sms":"","info":"","next":""},"b20":{"type":"statement","short":"","theme":"blue-card","text":"<span style='font-size:50px; text-align: center;'>&#9745;</span><br>\n                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>Access to VA Facilities Approved</span>\n                        <hr>Valid for $DATETIME.<hr>\n                        Please show this screen to security at the facility entrance, if required.","sms":"","info":"","next":""}}}];                 // variable that will be replaced by the federalist site generator
 
         let flowchart = flows[0].flow;
 
-        console.log('BaseURL: ' + '{base_url}');
+        console.log('BaseURL: ' + './');
         
         setup_facility(facilitydata[0]);
         handler_next(undefined, flowchart, first_flow_el);
