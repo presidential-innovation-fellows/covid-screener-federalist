@@ -4,6 +4,8 @@
 * [Setup](#setup)
 
 ## General Info
+IMPORTANT! This project is as of today live at https://covid19screen.oit.va.gov/ via Federalist
+
 This project is intended for generating a custom Covid-19 Self-Screening webpage for an agency, or building. It is primarily a directed graph/flow-chart style application, where information is shown based on the user's answers to a question.
 
 This project works in tandem with Federalist. It generates a number of self-contained html web pages in the `_site` folder. The web pages are created from the `site.template.html` file.

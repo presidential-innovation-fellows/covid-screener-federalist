@@ -474,11 +474,24 @@ const flowcharts = [
     {
         "id": 8,        // VA - Bradley's request to follow CDC guidelines (Feb 12, 21)
         "flow": { 
-           
-            "start": {
+            
+            "start": {  // added back on Feb 16, 21
+                    "type": "bool_decision",        // bool_decision OR 'statement'
+                                                    // If type = statement, it has only one button 'next'.
+                    "short": "", //Travel Risk?",   // OPTIONAL create a header for each question if available
+                    "theme": "white-card",          // class from theme.css
+                    "text": "<div class='text-left'>In the last 14 days, have you traveled internationally?<div>",      // text of the question
+                    "sms" : "In the last 14 days, have you traveled internationally?",      // TODO: OPTIONAL: used if SMS is enabled
+                    "info": "There are hotspots identified internationally.",// TODO: OPTIONAL: used in SMS right now
+                    "yes" : "b10",                  // For boolean 'type', Yes Button points to this next state
+                    "no"  : "b1"                    // For boolean 'type', No Button points to this next state
+                                                    // If empty, that marks the END of the flow. If "end" is 
+                                                    // explicitly used, as state, then Reset button is not shown.                                                    
+            },
+            "b1": {
                 "type": "bool_decision",
                 "short": "", //Symptoms to Watch?",
-                "text": `<div class='text-left'>Have you experienced any of the following symptoms in the past 48 hours: <br><br><ul>
+                "text": `<div class='text-left'>Have you experienced any of the following symptoms in the past 48 hours: <br>
                 <ul>
                     <li>fever or chills</li>
                     <li>cough</li>
