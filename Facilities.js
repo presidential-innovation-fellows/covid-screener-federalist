@@ -122,7 +122,7 @@ const facilities = [
     },
     {
         id: 8, // each facility has its unique ID
-        name: 'VA Non-Medical Facility Entrance Protocol<br><small>Accessibility note: JAWS Virtual Cursor required</small>',
+        name: 'VA Non-Medical Facility Entrance Protocol',
         default: true,  // if set to true, the site generator script creates an index.html file from this config
         generate_site: true,    // if set to true, the site generator creates an id.flow_id.html file from this config
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
