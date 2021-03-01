@@ -337,7 +337,8 @@
             document.getElementById('top_hdr').scrollIntoView(false);
         else
            // it is not the first element
-            new_el.scrollIntoView(false);
+           // new_el.scrollIntoView(false); // this is not making the bottom statement visible
+           document.getElementById('bottom_ftr_info').scrollIntoView(false);
     }   
 
     // this function is used when something goes wrong
