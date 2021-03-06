@@ -518,10 +518,8 @@ const flowcharts = [
                 "text": `<div class='text-left'>
                     Within the past 14 days, have you been in close physical contact (6 feet or closer for a cumulative total of 15 minutes) with:</p>
                     <ul>
-                        <li>Anyone who is known to have laboratory-confirmed COVID-19?</li></ul>
-			            <ul style="list-style-type: none;text-align: center;"><li><strong>OR</strong></li></ul>
-                    <ul>
-                        <li>Anyone who has any symptoms consistent with COVID-19?</li></ul>
+                        <li>Anyone who is known to have laboratory-confirmed COVID-19? <strong>OR</strong></li>
+			            <li>Anyone who has any symptoms consistent with COVID-19?</li></ul>
                 </div>`,
                 "sms" : "",
                 "info": "",
