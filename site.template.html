@@ -203,8 +203,6 @@
 
     function handler_next(called_by, flow, next_flow_el, all_buttons) {
         
-        called_by.setAttribute("aria-pressed", "true");
-
         if(next_flow_el==="") {
             // reset
             let node = document.getElementById("top_el");
@@ -229,7 +227,7 @@
         }
 
         if(called_by !== undefined){
-            
+            called_by.setAttribute("aria-pressed", "true");  
             let parent = document.getElementById('top_el'); 
             
             // TODO: more than two sibling buttons
