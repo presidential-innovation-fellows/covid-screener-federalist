@@ -551,7 +551,7 @@ const flowcharts = [
                 "short": "", //Not Approved
                 "theme": "cyan-card",
                 "text": `<span style='font-size:2em; line-height: 1.2em;'>Access to VA Facilities not approved</span>
-                        <hr>Valid for $DATETIME.
+                        <hr tabindex = "-1">Valid for $DATETIME.
                         <hr tabindex = "-1" >Contact your supervisor for further instructions.
                         <a href="https://www.cdc.gov/screening/further-instructions.html" target="_blank" title="Click Here">Click Here for CDC Guidelines.</a>`,
                 "sms" : "",
@@ -564,7 +564,7 @@ const flowcharts = [
                 "theme": "blue-card",
                 "text": `<span style='font-size:50px; text-align: center;'>&#9745;</span><br>
                         <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>Access to VA Facilities Approved</span>
-                        <hr tabindex = "-1" >Valid for $DATETIME.<hr>
+                        <hr tabindex = "-1" >Valid for $DATETIME.<hr tabindex = "-1">
                         Please show this screen to security at the facility entrance, if required.`,
                 "sms" : "",
                 "info": "",
