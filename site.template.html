@@ -324,10 +324,20 @@
                 // no_btn.id = nxt_no;
                 
                 yes_btn.addEventListener("click", function() { handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false);
-                yes_btn.addEventListener("keydown", function(event) { console.log("Keydown:" + event.keyCode); handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false); // success metric 4.1.2
+                // success metric 4.1.2
+                yes_btn.addEventListener("keydown", function(event) { 
+                        console.log("Keydown:" + event.keyCode); 
+                        if(event.keyCode == 32 || event.keyCode == 13)
+                            handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false); 
+                }
                 card_btns.push(yes_btn);
                 no_btn.addEventListener("click", function() { handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); }, false);
-                no_btn.addEventListener("keydown", function() { handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); }, false);    // success metric 4.1.2
+                // success metric 4.1.2
+                no_btn.addEventListener("keydown", function(event) { 
+                        console.log("Keydown:" + event.keyCode); 
+                        if(event.keyCode == 32 || event.keyCode == 13)
+                            handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); }, false); 
+                }
                 card_btns.push(no_btn);
             }            
         }
