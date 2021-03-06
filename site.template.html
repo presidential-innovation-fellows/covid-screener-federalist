@@ -85,8 +85,8 @@
         </h1>
     </div>
 
-    <div id="top_statement" tabindex="0" role="complementary" tabindex="1" class="mt-4 container-fluid text-left"> Please answer the questions listed below. <br>
-        <strong tabindex="0">We won't store or share your data.</strong><br>
+    <div id="top_statement" role="complementary" class="mt-4 container-fluid text-left"> Please answer the questions listed below. <br>
+        <strong>We won't store or share your data.</strong><br>
         Accessibility note: JAWS Virtual Cursor required</div>
     <div id="top_el" role="application" class="container mt-4">
         
@@ -229,7 +229,7 @@
         }
 
         if(called_by !== undefined){
-              
+            
             let parent = document.getElementById('top_el'); 
             
             // TODO: more than two sibling buttons
@@ -245,11 +245,12 @@
             
             if(called_by.classList.contains('button-white')) {
                // this button is not selected
-               called_by.classList.toggle( "button-white" );
-               called_by.classList.toggle( "button-blue" );               
+                called_by.classList.toggle( "button-white" );
+                called_by.classList.toggle( "button-blue" );               
+                called_by.setAttribute("aria-checked", "true"); // v2
 
                if(sibling_btn !== undefined) {
-                    sibling_btn.setAttribute("aria-pressed", "false");
+                    sibling_btn.setAttribute("aria-checked", "false"); //v2
                     if(sibling_btn.classList.contains('button-blue')) {
                         sibling_btn.classList.toggle( "button-white" );
                         sibling_btn.classList.toggle( "button-blue" );                        
@@ -319,14 +320,14 @@
                 yes_btn.className = "button-general button-white" ; //"btn btn-primary  mb-2 mr-2";
                 yes_btn.tabIndex = 0;
                 // yes_btn.id = nxt_yes;
-                yes_btn.setAttribute("aria-pressed", "false");
+                yes_btn.setAttribute("aria-checked", "false");
                 
                 let no_btn = document.createElement("BUTTON");
                 no_btn.textContent=`No`;
                 no_btn.className = "button-general button-white"; //"btn btn-primary  mb-2 mr-2";
                 no_btn.tabIndex = 0;
                 // no_btn.id = nxt_no;
-                no_btn.setAttribute("aria-pressed", "false");
+                no_btn.setAttribute("aria-checked", "false");
                 
                 yes_btn.addEventListener("click", function() { handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false);
                 // success metric 4.1.2
