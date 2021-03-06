@@ -553,7 +553,7 @@ const flowcharts = [
                 "text": `<span style='font-size:2em; line-height: 1.2em;'>Access to VA Facilities not approved</span>
                         <hr>Valid for $DATETIME.
                         <hr tabindex = "-1" >Contact your supervisor for further instructions.
-                        <a href="https://www.cdc.gov/screening/further-instructions.html" target="_blank" title="Click Here">Click Here</a> for Further Instructions`,
+                        <a href="https://www.cdc.gov/screening/further-instructions.html" target="_blank" title="Click Here">Click Here for Further Instructions</a>`,
                 "sms" : "",
                 "info": "",
                 "next": ""
