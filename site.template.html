@@ -203,6 +203,8 @@
 
     function handler_next(called_by, flow, next_flow_el, all_buttons) {
         
+        called_by.setAttribute("aria-pressed", "true");
+
         if(next_flow_el==="") {
             // reset
             let node = document.getElementById("top_el");
@@ -247,6 +249,7 @@
                called_by.classList.toggle( "button-blue" );               
 
                if(sibling_btn !== undefined) {
+                    sibling_btn.setAttribute("aria-pressed", "false");
                     if(sibling_btn.classList.contains('button-blue')) {
                         sibling_btn.classList.toggle( "button-white" );
                         sibling_btn.classList.toggle( "button-blue" );                        
@@ -316,17 +319,19 @@
                 yes_btn.className = "button-general button-white" ; //"btn btn-primary  mb-2 mr-2";
                 yes_btn.tabIndex = 0;
                 // yes_btn.id = nxt_yes;
+                yes_btn.setAttribute("aria-pressed", "false");
                 
                 let no_btn = document.createElement("BUTTON");
                 no_btn.textContent=`No`;
                 no_btn.className = "button-general button-white"; //"btn btn-primary  mb-2 mr-2";
                 no_btn.tabIndex = 0;
                 // no_btn.id = nxt_no;
+                no_btn.setAttribute("aria-pressed", "false");
                 
                 yes_btn.addEventListener("click", function() { handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false);
                 // success metric 4.1.2
                 yes_btn.addEventListener("keydown", function(event) { 
-                        console.log("Keydown:" + event.keyCode); 
+                        
                         if(event.keyCode == 32 || event.keyCode == 13) {
                             handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); 
                         }
@@ -337,7 +342,7 @@
                 no_btn.addEventListener("click", function() { handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); }, false);
                 // success metric 4.1.2
                 no_btn.addEventListener("keydown", function(event) { 
-                        console.log("Keydown:" + event.keyCode); 
+                        
                         if(event.keyCode == 32 || event.keyCode == 13) {
                             handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); 
                         }
