@@ -149,7 +149,7 @@
     {
         let el = document.createElement("DIV");
         el.className =  theme_string + " card text-center mt-5";
-        el.id = "card-" + id;
+        el.id = id;
         document.querySelectorAll("div.card")
         
         // console.log('card theme classes: ' + theme_string);
@@ -269,6 +269,8 @@
         let card_ftr = "";
         let card_btns = [];
 
+        let card_id = "card-" + next_flow_el;
+
         let state_theme = flow_el.theme;
 
         let flow_el_text = apply_variables_in_text(flow_el.text);
@@ -281,6 +283,7 @@
             card_bdy = flow_el_text; 
             card_hdr = flow_el.short;
             card_ftr = "";
+            
 
 
             if(nxt !== undefined && nxt!=="" && nxt !== "end")
@@ -321,6 +324,7 @@
                 yes_btn.tabIndex = 0;
                 // yes_btn.id = nxt_yes;
                 yes_btn.setAttribute("aria-checked", "false");
+                yes_btn.setAttribute("aria-describedy", card_id);
                 
                 let no_btn = document.createElement("BUTTON");
                 no_btn.textContent=`No`;
