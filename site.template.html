@@ -147,10 +147,18 @@
 
     function create_card_element(id, card_header, card_body, card_footer, card_btns, theme_string)
     {
+        let hdr_id = el.id + "-hdr";
+        let bdy_id = el.id + "-bdy";
+
         let el = document.createElement("DIV");
+
         el.className =  theme_string + " card text-center mt-5";
         el.id = id;
-        document.querySelectorAll("div.card")
+        el.setAttribute("role","dialog");
+        el.setAttribute("aria-labelledby",hdr_id);
+        el.setAttribute("aria-describedby",bdy_id);
+        
+        document.querySelectorAll("div.card");
         
         // console.log('card theme classes: ' + theme_string);
 
@@ -158,7 +166,7 @@
             let hdr = document.createElement("DIV");
             hdr.className = "card-header bg-dark text-light";
             hdr.innerHTML = card_header;
-            hdr.id = el.id + "-hdr"
+            hdr.id = hdr_id;
             el.appendChild(hdr);            
         }
         
@@ -171,7 +179,7 @@
             if(card_body.length>700)
                 bdy.style.fontSize = "70%"
 
-            bdy.id = el.id + "-bdy"
+            bdy.id = bdy_id;
             el.appendChild(bdy);
 
             if(card_btns.length > 0)
