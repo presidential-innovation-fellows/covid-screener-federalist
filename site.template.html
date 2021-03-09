@@ -147,10 +147,12 @@
 
     function create_card_element(id, card_header, card_body, card_footer, card_btns, theme_string)
     {
+        let el = document.createElement("DIV");
+        
         let hdr_id = el.id + "-hdr";
         let bdy_id = el.id + "-bdy";
 
-        let el = document.createElement("DIV");
+        
 
         el.className =  theme_string + " card text-center mt-5";
         el.id = id;
