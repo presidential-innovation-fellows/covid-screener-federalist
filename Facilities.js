@@ -3,6 +3,7 @@ const facilities = [
         id: 1,
         name: 'A GSA Facility',
         image: 'https://www.gsa.gov/sites/gsa.gov/templates/resources/images/nav-logo.png',
+        image_desc: 'GSA',
         header_color: '#204F81',
         header_text_color: '#ffffff',
         created_by: 'System',
@@ -19,6 +20,7 @@ const facilities = [
         id: 2, 
         name: 'VA Facility (Not Active Screening)',
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
+        image_desc: 'Veterans Affairs',
         header_color: '#112e51',
         header_text_color: '#ffffff',
         created_by: 'Mrs Smith',
@@ -35,6 +37,7 @@ const facilities = [
         id: 3, 
         name: 'VA Facility (Complex Flow)',
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
+        image_desc: 'Veterans Affairs',
         header_color: '#112e51',
         header_text_color: '#ffffff',
         created_by: 'Mrs Smith',
@@ -51,6 +54,7 @@ const facilities = [
         id: 4, 
         name: 'SSA Covid-19 Screening Tool',
         image: 'https://www.ssa.gov/framework/images/logo.svg',
+        image_desc: 'SSA',
         header_color: '#112e51',
         header_text_color: '#ffffff',
         created_by: 'Mrs Smith',
@@ -67,6 +71,7 @@ const facilities = [
         id: 5, 
         name: 'CDC Facility Entrance Protocol',
         image: '/assets/img/cdc.png',
+        image_desc: 'CDC',
         header_color: '#ffffff',
         header_text_color: '#000000',
         created_by: 'Cheryl Prigodich',
@@ -88,6 +93,7 @@ const facilities = [
         name: 'VA Facility Entrance Protocol For VACO',
         generate_site: false,    // if set to true, the site generator creates an id.flow_id.html file from this config
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
+        image_desc: 'Veterans Affairs',
         header_color: '#112e51',
         header_text_color: '#ffffff',   //TODO
         created_by: 'Joseph Nassar',    // For record
@@ -107,6 +113,7 @@ const facilities = [
         default: false,  // if set to true, the site generator script creates an index.html file from this config
         generate_site: true,    // if set to true, the site generator creates an id.flow_id.html file from this config
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
+        image_desc: 'Veterans Affairs',
         header_color: '#112e51',
         header_text_color: '#ffffff',   
         created_by: 'Bradly Armstrong',    // For record
@@ -126,6 +133,7 @@ const facilities = [
         default: true,  // if set to true, the site generator script creates an index.html file from this config
         generate_site: true,    // if set to true, the site generator creates an id.flow_id.html file from this config
         image: 'https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png',
+        image_desc: 'Veterans Affairs',
         header_color: '#112e51',
         header_text_color: '#ffffff',   
         created_by: 'Bradly Armstrong',    // For record
