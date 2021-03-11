@@ -254,13 +254,13 @@
             }
             
             if(called_by.classList.contains('button-white')) {
-               // this button is not selected
+               
                 called_by.classList.toggle( "button-white" );
                 called_by.classList.toggle( "button-blue" );               
-                called_by.setAttribute("aria-checked", "true"); // v2
+                called_by.setAttribute("aria-selected", "true"); // v2
 
                if(sibling_btn !== undefined) {
-                    sibling_btn.setAttribute("aria-checked", "false"); //v2
+                    sibling_btn.setAttribute("aria-selected", "false"); //v2
                     if(sibling_btn.classList.contains('button-blue')) {
                         sibling_btn.classList.toggle( "button-white" );
                         sibling_btn.classList.toggle( "button-blue" );                        
@@ -333,7 +333,7 @@
                 yes_btn.className = "button-general button-white" ; //"btn btn-primary  mb-2 mr-2";
                 yes_btn.tabIndex = 0;
                 // yes_btn.id = nxt_yes;
-                yes_btn.setAttribute("aria-checked", "false");
+                yes_btn.setAttribute("aria-pressed", "false");
                 yes_btn.setAttribute("aria-describedby", card_id);
                 
                 let no_btn = document.createElement("BUTTON");
@@ -341,7 +341,7 @@
                 no_btn.className = "button-general button-white"; //"btn btn-primary  mb-2 mr-2";
                 no_btn.tabIndex = 0;
                 // no_btn.id = nxt_no;
-                no_btn.setAttribute("aria-checked", "false");
+                no_btn.setAttribute("aria-pressed", "false");
                 
                 yes_btn.addEventListener("click", function() { handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false);
                 // success metric 4.1.2
