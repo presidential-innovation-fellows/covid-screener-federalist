@@ -85,13 +85,15 @@
         </h1>
     </div>
 
-    <div id="top_statement" tabindex="0" role="complementary" tabindex="1" class="mt-4 container-fluid text-left"> Please answer the questions listed below. We won't store or share your data.</div>
+    <div id="top_statement" role="complementary" class="mt-4 container-fluid text-left"> Please answer the questions listed below. <br>
+        <strong>We won't store or share your data.</strong><br>
+        Accessibility note: JAWS Virtual Cursor required</div>
     <div id="top_el" role="application" class="container mt-4">
         
     </div>
 
     <div id="bottom_ftr_info" role="contentinfo" class="text-white bg-primary font-weight-light container-fluid text-center mt-4 mb-4">
-        <small>Thank you for helping us protect you and others during this time.</small>
+        <small>Thank you for helping us protect you and others during this time. Please note we won't store or share your data.</small>
     </div>
   </body>
 </html>
@@ -146,9 +148,19 @@
     function create_card_element(id, card_header, card_body, card_footer, card_btns, theme_string)
     {
         let el = document.createElement("DIV");
+
+        let hdr_id = id + "-hdr";
+        let bdy_id = id + "-bdy";
+
+        
+
         el.className =  theme_string + " card text-center mt-5";
-        el.id = "card-" + id;
-        document.querySelectorAll("div.card")
+        el.id = id;
+        el.setAttribute("role","dialog");
+        el.setAttribute("aria-labelledby",hdr_id);
+        el.setAttribute("aria-describedby",bdy_id);
+        
+        document.querySelectorAll("div.card");
         
         // console.log('card theme classes: ' + theme_string);
 
@@ -156,7 +168,7 @@
             let hdr = document.createElement("DIV");
             hdr.className = "card-header bg-dark text-light";
             hdr.innerHTML = card_header;
-            hdr.id = el.id + "-hdr"
+            hdr.id = hdr_id;
             el.appendChild(hdr);            
         }
         
@@ -169,7 +181,7 @@
             if(card_body.length>700)
                 bdy.style.fontSize = "70%"
 
-            bdy.id = el.id + "-bdy"
+            bdy.id = bdy_id;
             el.appendChild(bdy);
 
             if(card_btns.length > 0)
@@ -242,11 +254,13 @@
             }
             
             if(called_by.classList.contains('button-white')) {
-               // this button is not selected
-               called_by.classList.toggle( "button-white" );
-               called_by.classList.toggle( "button-blue" );               
+               
+                called_by.classList.toggle( "button-white" );
+                called_by.classList.toggle( "button-blue" );               
+                called_by.setAttribute("aria-pressed", "true"); // v2 - 
 
-               if(sibling_btn !== undefined) {
+                if(sibling_btn !== undefined) {
+                    sibling_btn.setAttribute("aria-pressed", "false"); // v2 - 
                     if(sibling_btn.classList.contains('button-blue')) {
                         sibling_btn.classList.toggle( "button-white" );
                         sibling_btn.classList.toggle( "button-blue" );                        
@@ -265,6 +279,8 @@
         let card_ftr = "";
         let card_btns = [];
 
+        let card_id = "card-" + next_flow_el;
+
         let state_theme = flow_el.theme;
 
         let flow_el_text = apply_variables_in_text(flow_el.text);
@@ -277,6 +293,7 @@
             card_bdy = flow_el_text; 
             card_hdr = flow_el.short;
             card_ftr = "";
+            
 
 
             if(nxt !== undefined && nxt!=="" && nxt !== "end")
@@ -316,16 +333,37 @@
                 yes_btn.className = "button-general button-white" ; //"btn btn-primary  mb-2 mr-2";
                 yes_btn.tabIndex = 0;
                 // yes_btn.id = nxt_yes;
+                yes_btn.setAttribute("aria-pressed", "false");   // v2 - set intentionally
+                //yes_btn.setAttribute("aria-describedby", card_id);
                 
                 let no_btn = document.createElement("BUTTON");
                 no_btn.textContent=`No`;
                 no_btn.className = "button-general button-white"; //"btn btn-primary  mb-2 mr-2";
                 no_btn.tabIndex = 0;
                 // no_btn.id = nxt_no;
+                no_btn.setAttribute("aria-pressed", "false");
                 
                 yes_btn.addEventListener("click", function() { handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false);
+                // success metric 4.1.2
+                yes_btn.addEventListener("keydown", function(event) { 
+                        
+                        if(event.keyCode == 32 || event.keyCode == 13) {
+                            handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); 
+                        }
+                    }, false
+                    ); 
+                
                 card_btns.push(yes_btn);
                 no_btn.addEventListener("click", function() { handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); }, false);
+                // success metric 4.1.2
+                no_btn.addEventListener("keydown", function(event) { 
+                        
+                        if(event.keyCode == 32 || event.keyCode == 13) {
+                            handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); 
+                        }
+                    }, false
+                    ); 
+                
                 card_btns.push(no_btn);
             }            
         }
@@ -337,7 +375,8 @@
             document.getElementById('top_hdr').scrollIntoView(false);
         else
            // it is not the first element
-            new_el.scrollIntoView(false);
+           // new_el.scrollIntoView(false); // this is not making the bottom statement visible
+           document.getElementById('bottom_ftr_info').scrollIntoView(false);
     }   
 
     // this function is used when something goes wrong
@@ -401,8 +440,8 @@
     }
 
     function default_loop() {
-        let facilitydata = [{"id":8,"name":"VA Non-Medical Facility Entrance Protocol (v2)","default":true,"generate_site":true,"image":"https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png","header_color":"#112e51","header_text_color":"#ffffff","created_by":"Bradly Armstrong","created_on":"06/25/2020","effective_from":"02/12/2021","effective_till":"06/30/2023","flow_enabled":true,"address":"Any","gps_coord":"","sms_number":"","flow_id":8}];      // variable that will be replaced by the federalist site generator
-        let flows = [{"id":8,"flow":{"start":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>In the last 14 days, have you traveled internationally?<div>","sms":"In the last 14 days, have you traveled internationally?","info":"There are hotspots identified internationally.","yes":"b10","no":"b1"},"b1":{"type":"bool_decision","short":"","text":"<div class='text-left'>Have you experienced any of the following symptoms in the past 48 hours: <br>\n                <ul>\n                    <li>fever or chills</li>\n                    <li>cough</li>\n                    <li>shortness of breath or difficulty breathing</li>\n                    <li>fatigue</li>\n                    <li>muscle or body aches</li>\n                    <li>headache</li>\n                    <li>new loss of taste or smell</li>\n                    <li>sore throat</li>\n                    <li>congestion or runny nose</li>\n                    <li>nausea or vomiting</li>\n                    <li>diarrhea</li>\n                </ul></div>","theme":"white-card","sms":"","info":"","yes":"b10","no":"b2"},"b2":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>\n                    Within the past 14 days, have you been in close physical contact (6 feet or closer for a cumulative total of 15 minutes) with:</p>\n                    <ul>\n                        <li>Anyone who is known to have laboratory-confirmed COVID-19?</li></ul>\n\t\t\t            <ul style=\"list-style-type: none;text-align: center;\"><li><strong>OR</strong></li></ul>\n                    <ul>\n                        <li>Anyone who has any symptoms consistent with COVID-19?</li></ul>\n                </div>","sms":"","info":"","yes":"b10","no":"b3"},"b3":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>Are you isolating or quarantining because you may have been exposed to a person with COVID-19 or are worried that you may be sick with COVID-19?</div>","sms":"","info":"","yes":"b10","no":"b4"},"b4":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>Are you currently waiting on the results of a COVID-19 test?</div>","sms":"","info":"","yes":"b10","no":"b20"},"b10":{"type":"statement","short":"","theme":"cyan-card","text":"<span style='font-size:2em; line-height: 1.2em;'>Access to VA Facilities not approved</span>\n                        <hr>Valid for $DATETIME.\n                        <hr>Contact your supervisor for further instructions.\n                        <a href=\"https://www.cdc.gov/screening/further-instructions.html\" target=\"_blank\" title=\"Click Here\">Click Here</a> for Further Instructions","sms":"","info":"","next":""},"b20":{"type":"statement","short":"","theme":"blue-card","text":"<span style='font-size:50px; text-align: center;'>&#9745;</span><br>\n                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>Access to VA Facilities Approved</span>\n                        <hr>Valid for $DATETIME.<hr>\n                        Please show this screen to security at the facility entrance, if required.","sms":"","info":"","next":""}}}];                 // variable that will be replaced by the federalist site generator
+        let facilitydata = [{"id":8,"name":"VA Non-Medical Facility Entrance Protocol","default":true,"generate_site":true,"image":"https://prod-va-gov-assets.s3-us-gov-west-1.amazonaws.com/img/header-logo.png","header_color":"#112e51","header_text_color":"#ffffff","created_by":"Bradly Armstrong","created_on":"06/25/2020","effective_from":"02/12/2021","effective_till":"06/30/2023","flow_enabled":true,"address":"Any","gps_coord":"","sms_number":"","flow_id":8}];      // variable that will be replaced by the federalist site generator
+        let flows = [{"id":8,"flow":{"start":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>In the last 14 days, have you traveled internationally?<div>","sms":"In the last 14 days, have you traveled internationally?","info":"There are hotspots identified internationally.","yes":"b10","no":"b1"},"b1":{"type":"bool_decision","short":"","text":"<div class='text-left'>Have you experienced any of the following symptoms in the past 48 hours: <br>\n                <ul>\n                    <li>fever or chills</li>\n                    <li>cough</li>\n                    <li>shortness of breath or difficulty breathing</li>\n                    <li>fatigue</li>\n                    <li>muscle or body aches</li>\n                    <li>headache</li>\n                    <li>new loss of taste or smell</li>\n                    <li>sore throat</li>\n                    <li>congestion or runny nose</li>\n                    <li>nausea or vomiting</li>\n                    <li>diarrhea</li>\n                </ul></div>","theme":"white-card","sms":"","info":"","yes":"b10","no":"b2"},"b2":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>\n                    Within the past 14 days, have you been in close physical contact (6 feet or closer for a cumulative total of 15 minutes) with:</p>\n                    <ul>\n                        <li>Anyone who is known to have laboratory-confirmed COVID-19? <strong>OR</strong></li>\n\t\t\t            <li>Anyone who has any symptoms consistent with COVID-19?</li></ul>\n                </div>","sms":"","info":"","yes":"b10","no":"b3"},"b3":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>Are you isolating or quarantining because you may have been exposed to a person with COVID-19 or are worried that you may be sick with COVID-19?</div>","sms":"","info":"","yes":"b10","no":"b4"},"b4":{"type":"bool_decision","short":"","theme":"white-card","text":"<div class='text-left'>Are you currently waiting on the results of a COVID-19 test?</div>","sms":"","info":"","yes":"b10","no":"b20"},"b10":{"type":"statement","short":"","theme":"cyan-card","text":"<span style='font-size:2em; line-height: 1.2em;'>Access to VA Facilities not approved</span>\n                        <hr tabindex = \"-1\">Valid for $DATETIME.\n                        <hr tabindex = \"-1\" >Contact your supervisor for further instructions.\n                        <a href=\"https://www.cdc.gov/screening/further-instructions.html\" target=\"_blank\" title=\"Click Here\">Click Here for CDC Guidelines.</a>","sms":"","info":"","next":""},"b20":{"type":"statement","short":"","theme":"blue-card","text":"<span style='font-size:50px; text-align: center;'>&#9745;</span><br>\n                        <span style='font-size: 2em; line-height: 1.2em; text-align: left;'>Access to VA Facilities Approved</span>\n                        <hr tabindex = \"-1\" >Valid for $DATETIME.<hr tabindex = \"-1\">\n                        Please show this screen to security at the facility entrance, if required.","sms":"","info":"","next":""}}}];                 // variable that will be replaced by the federalist site generator
 
         let flowchart = flows[0].flow;
 

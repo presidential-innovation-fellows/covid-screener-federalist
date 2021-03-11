@@ -85,13 +85,15 @@
         </h1>
     </div>
 
-    <div id="top_statement" tabindex="0" role="complementary" tabindex="1" class="mt-4 container-fluid text-left"> Please answer the questions listed below. We won't store or share your data.</div>
+    <div id="top_statement" role="complementary" class="mt-4 container-fluid text-left"> Please answer the questions listed below. <br>
+        <strong>We won't store or share your data.</strong><br>
+        Accessibility note: JAWS Virtual Cursor required</div>
     <div id="top_el" role="application" class="container mt-4">
         
     </div>
 
     <div id="bottom_ftr_info" role="contentinfo" class="text-white bg-primary font-weight-light container-fluid text-center mt-4 mb-4">
-        <small>Thank you for helping us protect you and others during this time.</small>
+        <small>Thank you for helping us protect you and others during this time. Please note we won't store or share your data.</small>
     </div>
   </body>
 </html>
@@ -146,9 +148,19 @@
     function create_card_element(id, card_header, card_body, card_footer, card_btns, theme_string)
     {
         let el = document.createElement("DIV");
+
+        let hdr_id = id + "-hdr";
+        let bdy_id = id + "-bdy";
+
+        
+
         el.className =  theme_string + " card text-center mt-5";
-        el.id = "card-" + id;
-        document.querySelectorAll("div.card")
+        el.id = id;
+        el.setAttribute("role","dialog");
+        el.setAttribute("aria-labelledby",hdr_id);
+        el.setAttribute("aria-describedby",bdy_id);
+        
+        document.querySelectorAll("div.card");
         
         // console.log('card theme classes: ' + theme_string);
 
@@ -156,7 +168,7 @@
             let hdr = document.createElement("DIV");
             hdr.className = "card-header bg-dark text-light";
             hdr.innerHTML = card_header;
-            hdr.id = el.id + "-hdr"
+            hdr.id = hdr_id;
             el.appendChild(hdr);            
         }
         
@@ -169,7 +181,7 @@
             if(card_body.length>700)
                 bdy.style.fontSize = "70%"
 
-            bdy.id = el.id + "-bdy"
+            bdy.id = bdy_id;
             el.appendChild(bdy);
 
             if(card_btns.length > 0)
@@ -242,11 +254,13 @@
             }
             
             if(called_by.classList.contains('button-white')) {
-               // this button is not selected
-               called_by.classList.toggle( "button-white" );
-               called_by.classList.toggle( "button-blue" );               
+               
+                called_by.classList.toggle( "button-white" );
+                called_by.classList.toggle( "button-blue" );               
+                called_by.setAttribute("aria-pressed", "true"); // v2 - 
 
-               if(sibling_btn !== undefined) {
+                if(sibling_btn !== undefined) {
+                    sibling_btn.setAttribute("aria-pressed", "false"); // v2 - 
                     if(sibling_btn.classList.contains('button-blue')) {
                         sibling_btn.classList.toggle( "button-white" );
                         sibling_btn.classList.toggle( "button-blue" );                        
@@ -265,6 +279,8 @@
         let card_ftr = "";
         let card_btns = [];
 
+        let card_id = "card-" + next_flow_el;
+
         let state_theme = flow_el.theme;
 
         let flow_el_text = apply_variables_in_text(flow_el.text);
@@ -277,6 +293,7 @@
             card_bdy = flow_el_text; 
             card_hdr = flow_el.short;
             card_ftr = "";
+            
 
 
             if(nxt !== undefined && nxt!=="" && nxt !== "end")
@@ -316,16 +333,37 @@
                 yes_btn.className = "button-general button-white" ; //"btn btn-primary  mb-2 mr-2";
                 yes_btn.tabIndex = 0;
                 // yes_btn.id = nxt_yes;
+                yes_btn.setAttribute("aria-pressed", "false");   // v2 - set intentionally
+                //yes_btn.setAttribute("aria-describedby", card_id);
                 
                 let no_btn = document.createElement("BUTTON");
                 no_btn.textContent=`No`;
                 no_btn.className = "button-general button-white"; //"btn btn-primary  mb-2 mr-2";
                 no_btn.tabIndex = 0;
                 // no_btn.id = nxt_no;
+                no_btn.setAttribute("aria-pressed", "false");
                 
                 yes_btn.addEventListener("click", function() { handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); }, false);
+                // success metric 4.1.2
+                yes_btn.addEventListener("keydown", function(event) { 
+                        
+                        if(event.keyCode == 32 || event.keyCode == 13) {
+                            handler_next(yes_btn, flow, nxt_yes, [yes_btn, no_btn]); 
+                        }
+                    }, false
+                    ); 
+                
                 card_btns.push(yes_btn);
                 no_btn.addEventListener("click", function() { handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); }, false);
+                // success metric 4.1.2
+                no_btn.addEventListener("keydown", function(event) { 
+                        
+                        if(event.keyCode == 32 || event.keyCode == 13) {
+                            handler_next(no_btn, flow, nxt_no, [yes_btn, no_btn]); 
+                        }
+                    }, false
+                    ); 
+                
                 card_btns.push(no_btn);
             }            
         }
@@ -337,7 +375,8 @@
             document.getElementById('top_hdr').scrollIntoView(false);
         else
            // it is not the first element
-            new_el.scrollIntoView(false);
+           // new_el.scrollIntoView(false); // this is not making the bottom statement visible
+           document.getElementById('bottom_ftr_info').scrollIntoView(false);
     }   
 
     // this function is used when something goes wrong
