@@ -257,10 +257,10 @@
                
                 called_by.classList.toggle( "button-white" );
                 called_by.classList.toggle( "button-blue" );               
-                called_by.setAttribute("aria-selected", "false"); // v2 - this is backwards intentionally
+                called_by.setAttribute("aria-selected", "true"); // v2 - 
 
                 if(sibling_btn !== undefined) {
-                    sibling_btn.setAttribute("aria-selected", "true"); // v2 - this is backwards intentionally
+                    sibling_btn.setAttribute("aria-selected", "false"); // v2 - 
                     if(sibling_btn.classList.contains('button-blue')) {
                         sibling_btn.classList.toggle( "button-white" );
                         sibling_btn.classList.toggle( "button-blue" );                        
